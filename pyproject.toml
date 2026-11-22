@@ -1,0 +1,28 @@
+# Configuration des outils de test et de qualité (Pytest, Ruff)
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+# Les mesures longues sur le jeu réel (marqueur « mesures ») sont exclues par défaut, donc de la CI :
+# pytest -m mesures les exécute et régénère les fichiers de reports/
+addopts = [
+    "-m", "not mesures",
+    "--cov=app", "--cov-report=term-missing", "--cov-report=html:reports/coverage",
+    "--junitxml=reports/junit.xml",
+]
+markers = ["mesures: mesures longues sur le jeu réel (exploration, versions candidates, performance)"]
+filterwarnings = ["ignore:Using `httpx` with `starlette.testclient`"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+exclude = [".venv", "reports", "docs", "data", "models"]
+
+[tool.ruff.lint]
+# E / W : style PEP 8 ; F : erreurs (imports inutilisés, variables non définies) ; I : ordre des imports
+select = ["E", "F", "W", "I"]
+
+[tool.ruff.lint.per-file-ignores]
+# Fixtures partagées importées depuis tests/test_validation.py : leur nom en argument d'un test
+# n'est pas une redéfinition, c'est ainsi que pytest les injecte
+"tests/*" = ["F811"]

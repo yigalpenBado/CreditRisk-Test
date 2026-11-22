@@ -1,0 +1,65 @@
+# Chaîne de tests automatisés : à chaque Pull Request, à chaque envoi sur main, ou à la demande.
+# Rapide et adaptée à un runner CPU standard : pas de réentraînement complet. Les tests s'appuient
+# sur des modèles synthétiques entraînés en quelques millisecondes, et sur le modèle versionné
+# (models/model.pkl) comparé à la référence reports/baseline.json.
+name: Tests
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: Ruff + Pytest
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Récupération du code
+        uses: actions/checkout@v7
+
+      - name: Installation de Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Installation des dépendances (versions figées)
+        run: pip install -r requirements.txt
+
+      - name: Qualité du code (Ruff)
+        run: ruff check . --output-format=github
+
+      - name: Tests (Pytest) et couverture (pytest-cov)
+        run: pytest --cov-report=xml:reports/coverage.xml
+
+      - name: Résumé des tests et de la couverture
+        if: always()
+        run: |
+          python - >> "$GITHUB_STEP_SUMMARY" <<'EOF'
+          import xml.etree.ElementTree as ET
+          suite = ET.parse("reports/junit.xml").getroot().find("testsuite")
+          total, echecs = int(suite.get("tests")), int(suite.get("failures")) + int(suite.get("errors"))
+          ignores = int(suite.get("skipped"))
+          statut = "✅ Tous les tests sont passés" if echecs == 0 else f"❌ {echecs} test(s) en échec"
+          print(f"## {statut}\n")
+          print("| Total | Réussis | Échecs | Ignorés |\n|---|---|---|---|")
+          print(f"| {total} | {total - echecs - ignores} | {echecs} | {ignores} |\n")
+          EOF
+          echo "## Couverture du code" >> "$GITHUB_STEP_SUMMARY"
+          python -m coverage report --format=markdown >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Publication des rapports
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: rapports-tests
+          path: |
+            reports/junit.xml
+            reports/coverage.xml
+            reports/coverage/

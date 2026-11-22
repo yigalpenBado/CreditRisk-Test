@@ -1,0 +1,128 @@
+{
+  "configuration": {
+    "systeme": "Linux 7.0.0-43-generic",
+    "processeur": "13th Gen Intel(R) Core(TM) i9-13980HX",
+    "coeurs_logiques": 32,
+    "memoire_go": 32.8,
+    "python": "3.12.12",
+    "scikit-learn": "1.9.1",
+    "pandas": "3.1.0",
+    "fastapi": "0.162.0",
+    "serveur": "uvicorn, 2 processus",
+    "client": "httpx (même machine)"
+  },
+  "objectifs": {
+    "api_p95_ms": 100,
+    "modele_p95_ms": 10,
+    "debit_min_rps": 20,
+    "charge_p95_ms": 500,
+    "memoire_max_mo": 500
+  },
+  "protocole": {
+    "echauffement": 50,
+    "mesures": 1000
+  },
+  "modele_seul": {
+    "moyenne_ms": 4.39,
+    "p50_ms": 4.385,
+    "p95_ms": 4.528,
+    "p99_ms": 4.603,
+    "max_ms": 4.768
+  },
+  "prediction_complete": {
+    "moyenne_ms": 7.634,
+    "p50_ms": 7.529,
+    "p95_ms": 7.707,
+    "p99_ms": 7.875,
+    "max_ms": 57.364
+  },
+  "api_http": {
+    "moyenne_ms": 60.382,
+    "p50_ms": 60.141,
+    "p95_ms": 62.104,
+    "p99_ms": 63.889,
+    "max_ms": 90.951
+  },
+  "debit_modele_par_lot": {
+    "1": 227,
+    "10": 2258,
+    "100": 22017,
+    "1000": 181521
+  },
+  "charge_progressive": [
+    {
+      "utilisateurs": 1,
+      "requetes": 100,
+      "erreurs": 0,
+      "debit_rps": 16.8,
+      "moyenne_ms": 59.528,
+      "p50_ms": 60.038,
+      "p95_ms": 61.907,
+      "p99_ms": 62.161,
+      "max_ms": 62.979
+    },
+    {
+      "utilisateurs": 2,
+      "requetes": 200,
+      "erreurs": 0,
+      "debit_rps": 33.2,
+      "moyenne_ms": 59.867,
+      "p50_ms": 60.5,
+      "p95_ms": 62.899,
+      "p99_ms": 64.051,
+      "max_ms": 73.511
+    },
+    {
+      "utilisateurs": 4,
+      "requetes": 400,
+      "erreurs": 0,
+      "debit_rps": 55.5,
+      "moyenne_ms": 71.603,
+      "p50_ms": 71.949,
+      "p95_ms": 79.027,
+      "p99_ms": 81.616,
+      "max_ms": 96.012
+    },
+    {
+      "utilisateurs": 8,
+      "requetes": 800,
+      "erreurs": 0,
+      "debit_rps": 79.5,
+      "moyenne_ms": 92.456,
+      "p50_ms": 90.981,
+      "p95_ms": 122.371,
+      "p99_ms": 127.713,
+      "max_ms": 135.406
+    },
+    {
+      "utilisateurs": 16,
+      "requetes": 1600,
+      "erreurs": 0,
+      "debit_rps": 115.8,
+      "moyenne_ms": 133.585,
+      "p50_ms": 137.504,
+      "p95_ms": 172.24,
+      "p99_ms": 193.85,
+      "max_ms": 216.538
+    },
+    {
+      "utilisateurs": 32,
+      "requetes": 3200,
+      "erreurs": 0,
+      "debit_rps": 111.0,
+      "moyenne_ms": 250.078,
+      "p50_ms": 246.049,
+      "p95_ms": 378.965,
+      "p99_ms": 479.124,
+      "max_ms": 717.274
+    }
+  ],
+  "taille_modele_ko": 308.1,
+  "memoire_serveur_mo": 450.9,
+  "verdicts": {
+    "O1_api_p95": true,
+    "O2_modele_p95": true,
+    "O3_debit_sous_charge": true,
+    "O4_memoire": true
+  }
+}

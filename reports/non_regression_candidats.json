@@ -1,0 +1,169 @@
+{
+  "reference": {
+    "code": {
+      "fingerprint": "2c65364c7cc0",
+      "commit": "aucun"
+    },
+    "seuil": 0.32,
+    "metriques": {
+      "threshold": 0.32,
+      "recall": 0.8174,
+      "precision": 0.6149,
+      "f1": 0.7018,
+      "pr_auc": 0.8112,
+      "roc_auc": 0.8758,
+      "fpr": 0.2579,
+      "fnr": 0.1826,
+      "brier": 0.1308,
+      "log_loss": 0.4031,
+      "accuracy": 0.7673,
+      "tn": 492,
+      "fp": 171,
+      "fn": 61,
+      "tp": 273
+    }
+  },
+  "candidates": {
+    "V0 : référence rejouée (aucune modification)": {
+      "seuil": 0.32,
+      "metriques": {
+        "recall": 0.8174,
+        "precision": 0.6149,
+        "f1": 0.7018,
+        "pr_auc": 0.8112,
+        "roc_auc": 0.8758,
+        "fpr": 0.2579,
+        "fnr": 0.1826,
+        "brier": 0.1308,
+        "log_loss": 0.4031,
+        "accuracy": 0.7673,
+        "tn": 492,
+        "fp": 171,
+        "fn": 61,
+        "tp": 273
+      },
+      "decision": "accepter",
+      "motifs": [
+        "aucune variation au-delà des tolérances"
+      ]
+    },
+    "V1 : revenu sans transformation log": {
+      "seuil": 0.32,
+      "metriques": {
+        "recall": 0.8174,
+        "precision": 0.6135,
+        "f1": 0.7009,
+        "pr_auc": 0.8113,
+        "roc_auc": 0.8757,
+        "fpr": 0.2594,
+        "fnr": 0.1826,
+        "brier": 0.1308,
+        "log_loss": 0.4032,
+        "accuracy": 0.7663,
+        "tn": 491,
+        "fp": 172,
+        "fn": 61,
+        "tp": 273
+      },
+      "decision": "accepter",
+      "motifs": [
+        "aucune variation au-delà des tolérances"
+      ]
+    },
+    "V2 : pondération des classes (balanced)": {
+      "seuil": 0.5,
+      "metriques": {
+        "recall": 0.8024,
+        "precision": 0.6133,
+        "f1": 0.6952,
+        "pr_auc": 0.8066,
+        "roc_auc": 0.8744,
+        "fpr": 0.2549,
+        "fnr": 0.1976,
+        "brier": 0.1483,
+        "log_loss": 0.4433,
+        "accuracy": 0.7643,
+        "tn": 494,
+        "fp": 169,
+        "fn": 66,
+        "tp": 268
+      },
+      "decision": "investiguer",
+      "motifs": [
+        "probabilité modifiée de 0.2302 au maximum (tolérance 0.05)"
+      ]
+    },
+    "V3 : sans CheckingStatus ni CreditHistory": {
+      "seuil": 0.31,
+      "metriques": {
+        "recall": 0.8174,
+        "precision": 0.6067,
+        "f1": 0.6964,
+        "pr_auc": 0.8089,
+        "roc_auc": 0.8722,
+        "fpr": 0.267,
+        "fnr": 0.1826,
+        "brier": 0.1321,
+        "log_loss": 0.4097,
+        "accuracy": 0.7613,
+        "tn": 486,
+        "fp": 177,
+        "fn": 61,
+        "tp": 273
+      },
+      "decision": "investiguer",
+      "motifs": [
+        "probabilité modifiée de 0.3185 au maximum (tolérance 0.05)"
+      ]
+    },
+    "V4 : régularisation excessive (C = 0,001)": {
+      "seuil": 0.31,
+      "metriques": {
+        "recall": 0.8024,
+        "precision": 0.5776,
+        "f1": 0.6717,
+        "pr_auc": 0.747,
+        "roc_auc": 0.8463,
+        "fpr": 0.2956,
+        "fnr": 0.1976,
+        "brier": 0.1534,
+        "log_loss": 0.4742,
+        "accuracy": 0.7372,
+        "tn": 467,
+        "fp": 196,
+        "fn": 66,
+        "tp": 268
+      },
+      "decision": "rejeter",
+      "motifs": [
+        "f1 en baisse de 0.0301 (tolérance 0.02)",
+        "precision en baisse de 0.0373 (tolérance 0.02)",
+        "roc_auc en baisse de 0.0295 (tolérance 0.02)",
+        "probabilité modifiée de 0.4290 au maximum (tolérance 0.05)"
+      ]
+    },
+    "V5 : erreur de code, rappel visé 0,60": {
+      "seuil": 0.55,
+      "metriques": {
+        "recall": 0.6048,
+        "precision": 0.7984,
+        "f1": 0.6882,
+        "pr_auc": 0.8112,
+        "roc_auc": 0.8758,
+        "fpr": 0.0769,
+        "fnr": 0.3952,
+        "brier": 0.1308,
+        "log_loss": 0.4031,
+        "accuracy": 0.8164,
+        "tn": 612,
+        "fp": 51,
+        "fn": 132,
+        "tp": 202
+      },
+      "decision": "rejeter",
+      "motifs": [
+        "recall en baisse de 0.2126 (tolérance 0.02)"
+      ]
+    }
+  }
+}
